@@ -62,7 +62,7 @@ def check_resources(coffee_type):
 user_coffee_input = input("What would you like: (espresso, latte, cappuccino)? \nor X to exit \n").lower()
 while user_coffee_input != "x":
     user_coffee_input = user_coffee_input.strip()
-    if user_coffee_input == "espresso" or "latte" or "cappuccino":
+    if user_coffee_input in [ "espresso" or "latte" or "cappuccino"]:
         check_resources(coffee_type=user_coffee_input)
         print(f"Selected coffee: {user_coffee_input.capitalize()}")
         if check_resources(user_coffee_input):
@@ -77,6 +77,12 @@ while user_coffee_input != "x":
             
             if total_money < coffee_cost:
                 print("Sorry, that's not enough money. Money refunded.")
+            elif total_money == coffee_cost:
+                print("Thank you for your purchase! Enjoy your coffee!")
+                profit += coffee_cost
+                for item in MENU[user_coffee_input]["ingredients"]:
+                    resources[item] -= MENU[user_coffee_input]["ingredients"][item]
+                print(f"Here is your {user_coffee_input}. Enjoy!")
             else:
                 change = total_money - coffee_cost
                 if change > 0:
