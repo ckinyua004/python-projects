@@ -18,6 +18,6 @@ class QuizBrain():
             print("You got it right!")
             return True
         else:
-            print(f"That's wrong. The correct answer is {current_question.answer}.")
+            print(f"That's wrong. The bcorrect answer is {current_question.answer}.")
             return False
     
