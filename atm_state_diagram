@@ -1,0 +1,21 @@
+digraph ATM_StateDiagram {
+	rankdir=LR size="8,5"
+	Start [label="" fillcolor=black shape=circle style=filled]
+	Startup [label="Startup Test"]
+	OutOfService [label="Out of Service"]
+	Idle [label=Idle]
+	Serving [label="Serving Customer" shape=rectangle]
+	Auth [label="Customer Authentication" shape=box]
+	Select [label="Selecting Transaction" shape=box]
+	Txn [label=Transaction shape=box]
+	End [label="" shape=doublecircle]
+	Start -> Startup
+	Startup -> OutOfService [label="Test Fail"]
+	Startup -> Idle [label="Test Pass"]
+	Idle -> Serving [label="insertCard / readCard"]
+	Serving -> Idle [label="cancel OR after ejectCard"]
+	Serving -> Auth [style=dashed]
+	Auth -> Select
+	Select -> Txn
+	Txn -> Serving [label="[exit] ejectCard"]
+}
