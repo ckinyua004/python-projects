@@ -1,0 +1,3 @@
+1 Use beautiful soup to scrape billboard from a particular date of my choice
+2 Extract all the songs from the list
+3 Use spotify API to add songs to the playlist
