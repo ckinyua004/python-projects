@@ -1,0 +1,16 @@
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.edge.service import Service
+
+chrome_options = webdriver.ChromeOptions()
+chrome_options.add_experimental_option('detach', True)
+
+driver = webdriver.Chrome(options=chrome_options)
+driver.get(url="https://www.amazon.com")
+
+price_dollar = driver.find_element(By.CLASS_NAME, value='a-price-whole').text
+price_cents = driver.find_element(By.CLASS_NAME, value='a-price-fraction').text
+
+print(f'The price is {price_dollar}.{price_cents}')
+
+driver.close()
