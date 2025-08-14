@@ -1,0 +1,269 @@
+Starting a Flask project in VS Code involves a few setup steps. Here's a straightforward guide to get you started from scratch:
+
+---
+
+## ✅ 1. **Install Prerequisites**
+
+Make sure you have these installed:
+
+* **Python (3.x)** – download from [python.org](https://www.python.org/)
+* **VS Code** – download from [code.visualstudio.com](https://code.visualstudio.com/)
+* **Python extension** for VS Code – install via Extensions tab (`ms-python.python`)
+
+---
+
+## ✅ 2. **Create Project Folder**
+
+Create and open a new project directory in VS Code:
+
+```bash
+mkdir my_flask_app
+cd my_flask_app
+code .
+```
+
+---
+
+## ✅ 3. **Set Up Virtual Environment**
+
+In VS Code terminal:
+
+```bash
+python -m venv venv
+```
+
+Then activate it:
+
+* **Windows:**
+
+  ```bash
+  venv\Scripts\activate
+  ```
+* **Mac/Linux:**
+
+  ```bash
+  source venv/bin/activate
+  ```
+
+---
+
+## ✅ 4. **Install Flask**
+
+With the virtual environment activated:
+
+```bash
+pip install flask
+```
+
+Optionally freeze dependencies:
+
+```bash
+pip freeze > requirements.txt
+```
+
+---
+
+## ✅ 5. **Create a Basic Flask App**
+
+Create a file `app.py` in your project folder:
+
+```python
+from flask import Flask
+
+app = Flask(__name__)
+
+@app.route("/")
+def hello():
+    return "Hello, Flask!"
+
+if __name__ == "__main__":
+    app.run(debug=True)
+```
+
+---
+
+## ✅ 6. **Set Environment Variables**
+
+In the terminal, set the `FLASK_APP` environment variable:
+
+* **Windows (cmd):**
+
+  ```cmd
+  set FLASK_APP=app.py
+  set FLASK_ENV=development
+  ```
+* **PowerShell:**
+
+  ```powershell
+  $env:FLASK_APP = "app.py"
+  $env:FLASK_ENV = "development"
+  ```
+* **Mac/Linux:**
+
+  ```bash
+  export FLASK_APP=app.py
+  export FLASK_ENV=development
+  ```
+
+---
+
+## ✅ 7. **Run the Flask App**
+
+```bash
+flask run
+```
+
+Visit `http://127.0.0.1:5000` in your browser.
+
+---
+
+## ✅ 8. **Optional: Configure `launch.json` for VS Code Debugging**
+
+1. Go to **Run & Debug** (Ctrl+Shift+D)
+2. Click **"create a launch.json file"**
+3. Choose **Python**
+4. Replace contents with:
+
+```json
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Python: Flask",
+      "type": "python",
+      "request": "launch",
+      "module": "flask",
+      "env": {
+        "FLASK_APP": "app.py",
+        "FLASK_ENV": "development"
+      },
+      "args": [
+        "run"
+      ],
+      "jinja": true
+    }
+  ]
+}
+```
+
+Now press F5 to launch and debug.
+
+---
+
+## ✅ 9. **Organize Project (Optional but Recommended)**
+
+As your app grows, structure it like this:
+
+```
+my_flask_app/
+│
+├── app/
+│   ├── __init__.py
+│   ├── routes.py
+│   └── ...
+├── venv/
+├── app.py
+├── requirements.txt
+└── ...
+```
+
+---
+
+Let me know if you want a full project scaffold or REST API setup.
+
+
+The error:
+
+> `'flask' is not recognized as an internal or external command, operable program or batch file.`
+
+means that the `flask` command-line tool is **not available in your system PATH**, likely because:
+
+1. The virtual environment isn’t activated correctly, **or**
+2. Flask isn't installed inside the virtual environment, **or**
+3. You're using the **wrong terminal** (e.g., not using the terminal integrated with VS Code where the virtual environment is activated).
+
+---
+
+### ✅ Try These Steps to Fix It:
+
+---
+
+## 🔹 Step 1: **Activate Virtual Environment**
+
+Make sure you're in the project folder and the virtual environment is activated:
+
+**For CMD:**
+
+```cmd
+venv\Scripts\activate
+```
+
+**For PowerShell:**
+
+```powershell
+.\venv\Scripts\Activate.ps1
+```
+
+After this, your terminal should show something like:
+
+```powershell
+(venv) C:\Users\CALVIN\...
+```
+
+If it already shows `(venv)` — skip to Step 2.
+
+---
+
+## 🔹 Step 2: **Ensure Flask is Installed**
+
+Check if Flask is installed in the virtual environment:
+
+```bash
+pip show flask
+```
+
+If nothing is shown, install it:
+
+```bash
+pip install flask
+```
+
+---
+
+## 🔹 Step 3: **Use the Correct Terminal**
+
+**Important:** If you opened another terminal (e.g., outside of VS Code), it might not be using the activated environment.
+
+Always use the **integrated terminal in VS Code**:
+
+* Press <kbd>Ctrl</kbd> + <kbd>\`</kbd> (backtick) to open it.
+* Make sure `(venv)` is showing.
+* Run:
+
+```bash
+flask run
+```
+
+---
+
+## 🔹 Step 4: **Use Python to Run Flask (as a workaround)**
+
+If `flask` still isn't recognized, try running Flask via Python:
+
+```bash
+python -m flask run
+```
+
+This works even if the `flask` CLI command isn't directly available.
+
+---
+
+### ✅ If You Still Have Problems...
+
+Send me:
+
+* The output of `pip list`
+* The output of `where flask` or `Get-Command flask` (in PowerShell)
+* Your folder structure and which terminal you're using
+
+And I’ll help you debug it step by step.
